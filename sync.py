@@ -6,5 +6,5 @@ if __name__ == '__main__':
         config = json.load(f)
 
     event_manager = EventManager(config)
-    event_manager.clear()
+    # event_manager.clear()
     event_manager.update()
