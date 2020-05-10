@@ -32,16 +32,34 @@ class Calendar():
             ).execute()
 
             for body in response.get('items', []):
+                if 'description' not in body :
+                    raise ValueError("calendar event has no description. clear calendar events.")
                 desc = body['description']
                 events[Org.get_id(desc)] = self.__to_event(body)
 
         return events
 
-    def delete(self,  event):
+    def clear_events(self, desc=''):
+        # TODO: reccurring events の削除に対応
+
+        for sync_info in self.__sync_list:
+            response = self.__service.events().list(
+                calendarId=sync_info['calendar_id'],
+                singleEvents=True
+            ).execute()
+
+            for body in response.get('items', []):
+                self.__delete(sync_info['calendar_id'], body['id'])
+                print('Event deleted : {} '.format(body['summary']))
+
+    def __delete(self,  calendar_id, event_id):
         self.__service.events().delete(
-            calendarId=event.get_calendar_id(),
-            eventId=event.get_event_id()
+            calendarId=calendar_id,
+            eventId=event_id
         ).execute()
+
+    def delete(self,  event):
+        self.__delete(event.get_calendar_id(), event.get_event_id())
 
     def update(self, to_event, from_event):
         self.__service.events().update(

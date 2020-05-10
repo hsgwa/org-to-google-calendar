@@ -8,18 +8,7 @@ class EventManager():
         self.__cal = Calendar(config)
 
     def clear(self):
-        from tqdm import tqdm
-
-        events = self.__cal.get_events()
-
-        pbar = tqdm(total=len(events), desc='[Deleting all events...] ')
-        for i, event in enumerate(events.values()):
-            pbar.set_description('[Delete events {}/{}] '.format(i, len(events)))
-            self.__cal.delete(event)
-            pbar.update(1)
-        pbar.close()
-
-        print('%s events deleted.' % len(events))
+        self.__cal.clear_events()
 
     def update(self):
         from tqdm import tqdm
