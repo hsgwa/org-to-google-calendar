@@ -30,10 +30,11 @@ class Org():
 
     def get_events(self):
         from orgparse import load
+        import os.path
 
         events = {}
         for sync_info in self.__sync_list:
-            root = load(sync_info['org_file'])
+            root = load(os.path.expanduser(sync_info['org_file']))
 
             for node in root[1:]:
                 sched_event = self.__to_event(sync_info['calendar_id'], node, node.scheduled, id_prefix='S-')
