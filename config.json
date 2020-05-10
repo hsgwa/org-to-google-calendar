@@ -1,0 +1,10 @@
+{
+    "client_secret" : "client_secret.json",
+    "generate_token" : "token.pickle",
+    "sync" : [
+        {
+            "org_file" : "your_org_file.org",
+            "calendar_id" : "your_calendar_id@group.calendar.google.com"
+        },
+    ]
+}
