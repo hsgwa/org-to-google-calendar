@@ -5,6 +5,6 @@
         {
             "org_file" : "your_org_file.org",
             "calendar_id" : "your_calendar_id@group.calendar.google.com"
-        },
+        }
     ]
 }
