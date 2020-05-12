@@ -71,6 +71,6 @@ class Event():
             date_key = 'date'
 
         body['start'][date_key] = self.__start
-        body['end'][date_key] = self.__start
+        body['end'][date_key] = self.__end
 
         return body
