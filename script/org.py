@@ -34,7 +34,10 @@ class Org():
 
         events = {}
         for sync_info in self.__sync_list:
-            root = load(os.path.expanduser(sync_info['org_file']))
+            try:
+                root = load(os.path.expanduser(sync_info['org_file']))
+            except ValueError as e:
+                raise ValueError('Faled to parse {}: {} '.format(sync_info['org_file'], e))
 
             for node in root[1:]:
                 sched_event = self.__to_event(sync_info['calendar_id'], node, node.scheduled, id_prefix='S-')
